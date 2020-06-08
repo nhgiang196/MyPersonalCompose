@@ -1,0 +1,35 @@
+version: "3.4"
+networks: 
+  managment-network:
+    external: true
+
+services:
+    pgAdmin:
+        restart: always
+        image: dpage/pgadmin4
+        ports:
+            - "4199:80"
+        environment:
+            PGADMIN_DEFAULT_EMAIL: 1234@admin.com
+            PGADMIN_DEFAULT_PASSWORD: 1234
+        volumes:
+            - pgadmin:/var/lib/pgadmin
+        networks: 
+            - managment-network
+    postgres:
+        restart: always
+        image: postgres
+        container_name: "postgres_container"
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: me
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_DB: testDb
+        volumes:
+            - pgvol:/var/lib/postgresql/data
+        networks: 
+            - managment-network
+volumes:
+    pgvol:
+    pgadmin: 
