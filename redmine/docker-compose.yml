@@ -4,16 +4,18 @@ networks:
     external: true
 services:
   postgresql:
+    restart: always
     image: 'bitnami/postgresql:11'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - POSTGRESQL_USERNAME=bn_redmine
       - POSTGRESQL_DATABASE=bitnami_redmine
     volumes:
-      - 'postgresql_data:/bitnami/postgresql'
+      - './postgresql_data:/bitnami/postgresql'
     networks: 
       - managment-network      
   redmine:
+    restart: always
     image: 'bitnami/redmine:4'
     ports:
       - '4198:3000'
@@ -21,14 +23,17 @@ services:
       - REDMINE_DB_POSTGRES=postgresql
       - REDMINE_DB_USERNAME=bn_redmine
       - REDMINE_DB_NAME=bitnami_redmine
+      - REDMINE_USERNAME=admin
+      - REDMINE_PASSWORD=123456
     volumes:
       - './redmine_data:/bitnami'
       - './redmineFiles:/usr/src/redmine/files'
+      - './redmine-plugins:/usr/src/redmine/plugins'
+      - './redmine-themes:/usr/src/redmine/public/themes'
     networks: 
       - managment-network
     depends_on:
       - postgresql
 volumes:
   postgresql_data:
-    driver: local
   redmine_data:
