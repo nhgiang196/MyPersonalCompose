@@ -19,6 +19,7 @@ services:
     postgres:
         restart: always
         image: postgres
+        hostname: postgres
         container_name: "postgres_container"
         ports:
             - "5432:5432"
@@ -27,9 +28,9 @@ services:
             POSTGRES_PASSWORD: 1234
             POSTGRES_DB: testDb
         volumes:
-            - pgvol:/var/lib/postgresql/data
+            - pgvol:/var/lib/postgresql/data:rw
         networks: 
             - managment-network
 volumes:
-    pgvol:
+    pgvol: 
     pgadmin: 
