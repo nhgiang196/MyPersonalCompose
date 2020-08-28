@@ -1,0 +1,58 @@
+version: '3.7'
+
+volumes:
+  jenkins-docker-certs:
+    driver: local
+  jenkins-data:
+    driver: local
+
+networks:
+  jenkins:
+    driver: bridge
+
+services:
+  jenkins-docker:
+    container_name: jenkins-docker
+    hostname: docker
+    image: docker:dind
+    privileged: true
+    user: root
+    networks:
+      jenkins:
+        aliases:
+          - docker
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    volumes:
+      - jenkins-docker-certs:/certs/client
+      - jenkins-data:/var/jenkins_home
+    ports:
+      - 2376:2376
+
+  jenkins-blueocean:
+    container_name: jenkins-blueocean
+    image: jenkinsci/blueocean
+    networks:
+      - jenkins
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+    ports:
+      - 8089:8080
+      - 50000:5000
+
+  # jenkins:
+  #   image: jenkins/jenkins:lts
+  #   privileged: true
+  #   user: root
+  #   ports:
+  #     - 8089:8080
+  #     - 50000:50000
+  #   container_name: jenkins
+  #   volumes:
+  #     - ~/jenkins:/var/jenkins_home
+     
