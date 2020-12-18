@@ -31,7 +31,7 @@ services:
 
   jenkins-blueocean:
     container_name: jenkins-blueocean
-    image: jenkinsci/blueocean
+    image: jenkinsci/blueocean:1.24.2-bcc31d32159f
     networks:
       - jenkins
     environment:
