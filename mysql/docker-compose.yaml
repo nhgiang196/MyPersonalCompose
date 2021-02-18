@@ -1,0 +1,55 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  # db:
+    # image: postgres
+    # restart: always
+    # environment:
+      # POSTGRES_PASSWORD: admin
+    # ports:
+      # - 5432:5432
+
+  # # adminer:
+  # #   image: adminer
+  # #   restart: always
+  # #   ports:
+  # #     - 8080:8080
+  # pgadmin:
+    # image: dpage/pgadmin4
+    # restart: always
+    # ports:
+      # - 8082:80
+    # # volumes:
+    # #   - ./db:/var/lib/pgadmin/storage
+    # environment:
+      # PGADMIN_DEFAULT_EMAIL: 'thanhtai42@gmail.com'
+      # PGADMIN_DEFAULT_PASSWORD: admin
+   #container MySql
+  mysql-db:
+    container_name: mysql-product
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    hostname: mysql-product
+    # networks:
+    #   - my-network
+    restart: always 
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+    # MyAdmin
+  php-myadmin:
+    container_name: my-admin
+    image: phpmyadmin/phpmyadmin:latest
+    hostname: myadmin
+    # networks:
+    #   - my-network
+    restart: always
+    ports:
+      - 8081:80    
+    environment:
+      PMA_HOST: mysql-product
+      MYSQL_ROOT_PASSWORD: admin
