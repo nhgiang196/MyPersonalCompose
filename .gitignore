@@ -151,3 +151,6 @@
 200826083103_test.xml
 /redmine/redmine_data/.bundle/config
 /desktop.ini
+/gitlab/srv/gitlab/logs/reconfigure
+/gitlab/srv/gitlab/logs/sshd/*.s
+/postgreSql/pgadminstorage
