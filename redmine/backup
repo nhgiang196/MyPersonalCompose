@@ -1,0 +1,1 @@
+pgloader mysql://root:admin@192.168.103.96:3306/redmine postgresql://me:1234@localhost/new_db2
