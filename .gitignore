@@ -6,3 +6,4 @@
 /gitlab/srv/gitlab/logs/sshd/*.s
 /postgreSql/pgadminstorage
 /redmine/redmine_data/redmine
+/redmine/redmine_data
