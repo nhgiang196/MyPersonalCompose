@@ -12,9 +12,9 @@ services:
         environment:
             PGADMIN_DEFAULT_EMAIL: 1234@admin.com
             PGADMIN_DEFAULT_PASSWORD: 1234
-        volumes:
-            - ./pgadminstorage:/var/lib/pgadmin/storage/1234_admin.com
-            - pgadmin:/var/lib/pgadmin
+        #volumes:
+        #    - ./pgadminstorage:/var/lib/pgadmin/storage/1234_admin.com
+        #    - pgadmin:/var/lib/pgadmin
         networks: 
             - managment-network
     postgres:

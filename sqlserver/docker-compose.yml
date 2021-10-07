@@ -1,0 +1,30 @@
+version: "3.4"
+networks: 
+  managment-network:
+    external: true
+services:
+    svc_sqlserver:
+        restart: always
+        user: root
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - "1433:1433"
+            - "135:135"
+            - "51000:51000"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=123a123@
+            - MSSQL_PID=Express
+            - TZ=Asia/Ho_Chi_Minh
+            - MSSQL_DATA_DIR=/var/opt/mssql/data
+            - MSSQL_LOG_DIR=/var/opt/mssql/log
+            - MSSQL_BACKUP_DIR=/var/opt/mssql/backup
+            - MSSQL_DTC_TCP_PORT=51000
+            - MSSQL_RPC_PORT=135
+        networks: 
+            - managment-network
+        volumes: 
+            -  ./path:/path
+            - ./datapath:/var/opt/mssql/data
+            - ./datapath:/var/opt/mssql/backup
+            - ./datapath:/var/opt/mssql/log

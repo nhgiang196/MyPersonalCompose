@@ -7,3 +7,7 @@
 /postgreSql/pgadminstorage
 /redmine/redmine_data/redmine
 /redmine/redmine_data
+/sqlserver/datapath
+/sqlserver/path
+/sqlserver/sqlvolume
+

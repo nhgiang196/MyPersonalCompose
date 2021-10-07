@@ -9,7 +9,7 @@ bundle install (nếu có yêu cầu về option thì chạy đúng yêu cầu t
 touch tmp/restart.txt
 
 
-## Cài đặt plugin Im Link
+	## Cài đặt plugin Im Link
 
 docker exec -it redmine_redmine_1 bash
 cd /opt/bitnami/redmine/plugins/
